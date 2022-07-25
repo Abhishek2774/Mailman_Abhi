@@ -18,7 +18,7 @@ if (isset($_POST['reset_link'])){
             $subject = "Reset Link for reseting password";
             $html = "
             <h1>Click on the given link to reset password</h1> 
-            <a href='http://localhost/Abhishek_mailman/reset_password_bakend.php?reset=" . $reset_link . "&unique_id=" . $unique_id . "' style='    color: #fff;background-color: #B8FF33;border-color: #198754;padding: 0.5rem 1rem;font-size: 1.25rem;border-radius: 0.3rem;'>Reset Password</a>";
+            <a href='http://localhost/Mailman_Abhi/reset_password_bakend.php?reset=" . $reset_link . "&unique_id=" . $unique_id . "' style='    color: #fff;background-color: #B8FF33;border-color: #198754;padding: 0.5rem 1rem;font-size: 1.25rem;border-radius: 0.3rem;'>Reset Password</a>";
         //    print_r($html);die('sdffd');
             $ob_email = new sendEmail();
             $ob_email->email_send($data['remail'], $subject, $html, 'Hestabit');
