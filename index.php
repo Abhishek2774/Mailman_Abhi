@@ -21,8 +21,8 @@ if(isset($_POST['submit'])){
         if($gobj->login_user('Reg_userid',$data)){
             $result = $gobj->getResult(); 
               $_SESSION['login_user_Email'] =  $email_username;
-            //   header("location:http://localhost/Abhishek_mailman/dashboard.php"); // for local 
-              header("location:http://hestalabs.com/tse/Abhishek_mailman/dashboard.php"); // for sever
+            //   header("location:http://localhost/Mailman_Abhi/dashboard.php"); // for local 
+              header("location:http://hestalabs.com/tse/Mailman_Abhi/dashboard.php"); // for sever
                 
         }else{
             
