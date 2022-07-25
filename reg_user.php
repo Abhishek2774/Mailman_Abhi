@@ -69,7 +69,7 @@ if (isset($_POST['submit'])) {
     }
   }
 
-  if (!preg_match($recover_pattern, $remail)) {
+  if(!filter_var($remail, FILTER_VALIDATE_EMAIL)){
 
     $error['remail_error'] = 'email address not vlaid';
   } else {
