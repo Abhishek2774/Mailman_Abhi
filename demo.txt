@@ -1,0 +1,373 @@
+$('#submitCvUser').click(function() {
+      var error = 0;
+      var job = $('#job').val();
+      if (job == '' || job == null) {
+        error++;
+        $('#joberror').text('Job is required.');
+      } else {
+        $('#joberror').text('');
+      }
+
+      var sess_role = $('#sess_role').val();
+      if (sess_role != 3) {
+        var reviewer = $('#reviewer_id').val();
+        if (reviewer == '' || reviewer == null) {
+          error++;
+          $('#reviewerierror').text('Reviewer is required.');
+        } else {
+          $('#reviewerierror').text('');
+        }
+      }
+      var name = $('#cvname').val();
+      if (name == '' || name == null) {
+        error++;
+        $('#cvnameerror').text('Name is required.');
+      } else {
+        $('#cvnameerror').text('');
+      }
+
+      var mobregex = /^[6-9]\d{9}$/;
+      var mobile = $('#cvmobile').val();
+      if (mobile == '' || mobile == null) {
+        error++;
+        $('#cvmobileerror').text('Mobile is required.');
+      } else if (!mobregex.test(mobile)) {
+        error++;
+        $('#cvmobileerror').text('Enter valid mobile');
+      } else {
+        $('#cvmobileerror').text('');
+      }
+
+
+      // var gender = $('#cvgender').val();
+      // if (gender == '' || gender == null) {
+      //   error++;
+      //   $('#gendererror').text('Gender is required.');
+      // } else {
+      //   $('#gendererror').text('');
+      // }
+
+      var emailRegex = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+      var emailid = $('#cvemail').val();
+      if (emailid == '' || emailid == null) {
+        error++;
+        $('#cvemailerror').text('Email is required');
+      } else if (!emailRegex.test(emailid)) {
+        error++;
+        $('#cvemailerror').text('Enter Valid email id');
+      } else {
+        $('#cvemailerror').text('');
+      }
+      // var dob = $('#cv_dob').val();
+      // if (dob == '' || dob == null) {
+      //   error++;
+      //   $('#cv_doberror').text('Date of birth is required.');
+      // } else {
+      //   $('#cv_doberror').text('');
+      // }
+
+      var Skills = $('#Skills').val();
+      if (Skills == '' || Skills == null) {
+        error++;
+        $('#Skillserror').text(' Skills is required.');
+      } else {
+        $('#Skillserror').text('');
+      }
+
+      // var Current_Location = $('#Current_Location').val();
+      // if (Current_Location == '' || Current_Location == null) {
+      //   error++;
+      //   $('#Current_Location_error').text(' Current Location is required.');
+      // } else {
+      //   $('#Current_Location_error').text('');
+      // }
+
+      // var native_Location = $('#native_Location').val();
+      // if (native_Location == '' || native_Location == null) {
+      //   error++;
+      //   $('#Native_Location_error').text('Native Location is required.');
+      // } else {
+      //   $('#Native_Location_error').text('');
+      // }
+
+      // var prf_Location = $('#prf_Location').val();
+      // if (prf_Location == '' || prf_Location == null) {
+      //   error++;
+      //   $('#prf_Location_error').text('Preferd Location is required.');
+      // } else {
+      //   $('#prf_Location_error').text('');
+      // }
+
+      // var Relevant_Expriance = $('#Relevant_Expriance').val();
+      // if (Relevant_Expriance == '' || Relevant_Expriance == null) {
+      //   error++;
+      //   $('#Relevant_Expriance_error').text('Relevant Expriance is required.');
+      // } else {
+      //   $('#Relevant_Expriance_error').text('');
+      // }
+
+      // var Expriance_Year = $('#Expriance_Year').val();
+      // if (Expriance_Year == '' || Expriance_Year == null) {
+      //   error++;
+      //   $('#Expriance_Yearerror').text('Expriance Year is required.');
+      // } else {
+      //   $('#Expriance_Yearerror').text('');
+      // }
+
+      var Current_Compony = $('#Current_Compony').val();
+      if (Current_Compony == '' || Current_Compony == null) {
+        error++;
+        $('#Current_Componyerror').text('Current Compony is required.');
+      } else {
+        $('#Current_Componyerror').text('');
+      }
+
+      // var Current_ctc = $('#Current_ctc').val();
+      // if (Current_ctc == '' || Current_ctc == null) {
+      //   error++;
+      //   $('#Current_ctcerror').text('Current ctc is required.');
+      // } else {
+      //   $('#Current_ctcerror').text('');
+      // }
+
+      var regined = $('#regined').val();
+      if (regined == '' || regined == null) {
+        error++;
+        $('#regined_error').text('regined Status is required.');
+      } else {
+        $('#regined_error').text('');
+      }
+
+      // var Job_Type = $('#Job_Type').val();
+      // if (Job_Type == '' || Job_Type == null) {
+      //   error++;
+      //   $('#Job_Type_error').text('Job Type is required.');
+      // } else {
+      //   $('#Job_Type_error').text('');
+      // }
+
+      var description = $('#description').val();
+      if (description == '' || description == null) {
+        error++;
+        $('#descriptionerror').text('Description is required');
+      } else {
+        $('#descriptionerror').text('');
+      }
+      // var recruiter_id = $('#recruiter_id').val();
+
+      // var recruiter_id = $('#recruiter_id').val();
+      // if (recruiter_id == '' || recruiter_id == null) {
+      //   error++;
+      //   $('#recruiteriderror').text('Recruiter is required.');
+      // } else {
+      //   $('#recruiteriderror').text('');
+      // }
+      var existMobile = $('#existMobile').val();
+      console.log(existMobile);
+      if (existMobile == '0') {
+        error++;
+        $('#exist_cvmobile_error').text('Given mobile number already in use.');
+      } else {
+        $('#exist_cvmobile_error').text('');
+      }
+
+      var existEmail = $('#existEmail').val();
+      if (existEmail == '0') {
+        error++;
+        $('#cv_exit_email_error').text('Given email already in use.');
+      } else {
+        $('#cv_exit_email_error').text('');
+      }
+
+      if (error > 0) {
+        return false;
+      } else {
+        // $('#profileform').serialize()
+        var postData = $('#addCVform').serialize();
+        $.ajax({
+          url: "<?php echo base_url('admin/Users/saveCv') ?>",
+          type: 'post',
+          dataType: 'json',
+          data: postData,
+          success: function(result) {
+            if (result.sts == 1) {
+              var cvMyfile = $('#cvMyfile').val();
+              if (cvMyfile == '' || cvMyfile == null) {
+                swal({
+                  title: "Success :)",
+                  text: "Information saved Successfully",
+                  icon: "success",
+                  button: "Done",
+                }, function() {
+                  window.location.href = "<?php echo base_url('admin/users/cvCondidate') ?>/" + btoa(job)
+                });
+              } else {
+                // toastr.success("Information saved Successfully.", "Success");
+                let fileType = $('#cvMyfile')[0].files[0].type;
+                let fileSize = $('#cvMyfile')[0].files[0].size;
+                if (fileSize > 1000000) {
+                  swal({
+                    title: "File Size Error :(!",
+                    text: "File Should be less than 900kb",
+                    icon: "error",
+                    button: "Try Again",
+                  });
+                  return 0;
+                }
+                var imageData = new FormData(document.getElementById("addCVform"));
+                var inser_id = result.insert_id;
+                $.ajax({
+                  url: "<?php echo base_url('admin/Users/saveUploadCV/') ?>" + btoa(inser_id),
+                  type: 'post',
+                  dataType: 'json',
+                  data: imageData,
+                  processData: false,
+                  contentType: false,
+                  cache: false,
+                  async: false,
+                  success: function(result) {
+                    if (result.stas == 1) {
+                      swal({
+                        title: "Success :)",
+                        text: "Information saved Successfully",
+                        icon: "success",
+                        button: "Done",
+                      }, function() {
+                        window.location.href = "<?php echo base_url('admin/users/cvCondidate') ?>/" + btoa(job)
+                      });
+                    } else if (result.stas == 0) {
+                      swal({
+                        title: "Unknown Error :(",
+                        text: "Unable to upload file",
+                        icon: "error",
+                        button: "Try Again",
+                      });
+                    } else if (result.stas == 4) {
+                      swal({
+                        title: "File Size Error :(",
+                        text: "File size should be less than 100kb",
+                        icon: "error",
+                        button: "Try Again",
+                      });
+                    } else if (result.stas == 3) {
+                      swal({
+                        title: "File Name Error :(",
+                        text: "Invalid file name",
+                        icon: "error",
+                        button: "Try Again",
+                      });
+                    } else {
+                      swal({
+                        title: "Unknown Error :(",
+                        text: "Something went wrong",
+                        icon: "error",
+                        button: "Try Again",
+                      });
+                    }
+                    // $("#pdfrefres").load(" #pdfrefres > *");
+                  }
+                });
+              }
+            } else if (result.sts == 0) {
+              swal({
+                title: "Unknown Error :(",
+                text: "Unable to upload file",
+                icon: "error",
+                button: "Try Again",
+              });
+            }
+
+          }
+        });
+        return true;
+      }
+
+    });
+..................................................................  
+////////////////////////check mobile and email number exit or not in CV /////
+    $("#cvmobile").keyup(function() {
+      var cvmobile = $("#cvmobile").val();
+      var job_id = $('#job').val();
+      if (cvmobile.length == 10) {
+        $("#cvmobile").addClass("spinner");
+        $.ajax({
+          type: 'POST',
+          url: "<?php echo base_url('admin/Dashboard/existMobile') ?>",
+          data: {
+            cvmobile: cvmobile,
+            job_id: job_id,
+          },
+          dataType: 'json',
+          success: function(data) {
+            if (data.status == 0) {
+              $("#cvmobile").removeClass("spinner");
+              $('#cvmobileerror').text(data.msg);
+              $("#mobok").css('display', 'none');
+              $('#existMobile').val(data.status);
+            } else {
+              $('#existMobile').val('');
+              $("#cvmobile").removeClass("spinner");
+              $("#mobok").css('display', 'block');
+              $('#cvmobileerror').text('');
+            }
+          },
+
+        });
+      } else {
+        return false;
+      }
+    });
+
+    ....................... live search ...................................
+    <?php  
+include "autoload.php";
+$gobj = new Database();
+$limit_per_page = 10;
+
+$page ="";
+$login_user = $_SESSION['login_user_Email'];
+if(isset($_POST['page_no'])){
+    $page = $_POST['page_no'];
+}else
+{
+    $page = 1;
+}
+    $offset = ($page -1)* $limit_per_page;
+
+ $search_value = $_POST["search"];
+$sql = "SELECT * FROM All_emails WHERE  subject like '%$search_value%' ORDER BY id DESC LIMIT {$offset},{$limit_per_page}";
+ $result = $gobj->mysqli->query($sql) or die("sql query failed");
+ $row =$result->fetch_all(MYSQLI_ASSOC);
+$output = "";
+
+if($result->num_rows > 0){
+  foreach($row as $key => $val){
+    $output .="<tr>
+                <td><input type='checkbox'></td>
+                <td>".$val["reciver_email"]."</td>
+                <td>".$val["subject"]."</td>
+                <td>".$val["datetime"]."</td>
+                </tr>";
+  } 
+
+  $sql2 = "SELECT * FROM All_emails WHERE  subject like '%$search_value%'";
+  $result = $gobj->mysqli->query($sql2)or die("Query failed");
+  $total_record =($result->num_rows >0);
+  echo $total_pages;
+  $total_pages =ceil($total_record/$limit_per_page);   
+  $output .='<div id="pagination" class="d-flex">';
+      for($i=1; $i <= $total_pages; $i++){
+          $output.="<a class='page-link' id='{$i}' href='#'>{$i}</a>";
+      }
+$output .='</div>';
+
+  echo json_encode(["status" => true, "message" => "html_data_found", "tablehtml" => $output]);
+
+}else{
+  echo json_encode(["status" => false, "message" => "Data Not found"]);
+  
+ }
+
+
+
+?>

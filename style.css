@@ -1,0 +1,36 @@
+
+    body {
+        margin: 0;
+        padding: 0;
+        }
+   .model
+   {
+    background: white;
+    width: 500px;
+    padding: 25px;
+    margin: 50px auto 0;
+    border: 5px solid blue;
+    border-radius: 10px;
+   }
+   .model h1{
+    font-size: 24px;
+    line-height: 24px;
+    padding: 20px;
+    text-align: center;
+   }
+
+   .modelf{
+    background: white;
+    width: 700px;
+    padding: 25px;
+    margin: 50px auto 0;
+    border: 5px solid blue;
+    border-radius: 10px;
+
+   }
+  
+.box input {
+  height: 2em;
+  width: 2em;
+  vertical-align: middle;
+}
