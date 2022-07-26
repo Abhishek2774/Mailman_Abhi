@@ -69,8 +69,9 @@ include 'header.php';
   .unreads {
     font-weight: bold;
   }
-  #msg{
-    white-space: pre-wrap; 
+
+  #msg {
+    white-space: pre-wrap;
   }
 </style>
 </head>
@@ -91,7 +92,7 @@ include 'header.php';
           <?php
           $profile_url = !empty($profile['image']) ? $profile['image'] : 'login.jpeg';
           ?>
-          <img src="<?php echo   'image/'.$profile_url; ?>" alt="not found" width="50" height="50" class="rounded-circle border border-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <img src="<?php echo   'image/' . $profile_url; ?>" alt="not found" width="50" height="50" class="rounded-circle border border-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <ul class="dropdown-menu dropdown-menu-right">
             <li><a class="dropdown-item" data-toggle="modal" data-target=".bd-example-modal-lg" href="#one">Profile</a></li>
             <li><a class="dropdown-item" href="logout.php">Logout</a></li>
@@ -102,7 +103,7 @@ include 'header.php';
     <div class="sidebar py-5">
       <ul style="list-style: none;">
 
-        <li class=""><button type="button" class="btn btn-warning flex" data-toggle="modal" data-target="#exampleModal">Compose</button></li>
+        <li><button type="button" class="btn btn-warning flex" data-toggle="modal" data-target="#exampleModal">Compose</button></li>
 
         <li><button type="button" class="btn  mt-5" id="inbox">Inbox</button></li>
 
@@ -148,6 +149,17 @@ include 'header.php';
 
   <!-- compose model -->
   <!-- Modal -->
+  <?php 
+  if (isset($_POST["sender"]) || isset($_POST["reciver"])){
+   echo $sender_id = $_POST["sender"];
+   echo  $reciever_id =  $_POST["reciver"];
+  }else{
+
+    echo "data are not send";
+
+  }
+  
+  ?>
   <div class="modal " id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -163,7 +175,7 @@ include 'header.php';
                 <div id="error-data"></div>
                 <span id="error_msg" style="display:none">Email has been Send</span>
                 <ul class="list-group list-group-flush">
-                  <li class="list-group-item">To <input type="text" id="toemail" name="toemail" class="border-0"></li>
+                  <li class="list-group-item">To <input type="text" id="toemail"  name="toemail" class="border-0"></li>
                   <div class="text-danger" id="err_toemail"></div>
                   <li class="list-group-item">CC<input type="text" id="ccemail" name="ccemail" class="border-0"></li>
                   <li class="list-group-item">BCC<input type="text" id="bccemail" name="bccemail" class="border-0"></li>
@@ -223,7 +235,7 @@ include 'header.php';
               <?php
               $profile_url = !empty($profile['image']) ? $profile['image'] : 'login.jpeg';
               ?>
-              <img src="<?php echo  'image/'.$profile_url; ?>" width="150px" height="150px" class="rounded-circle border border-primary" alt="NOT found">
+              <img src="<?php echo  'image/' . $profile_url; ?>" width="150px" height="150px" class="rounded-circle border border-primary" alt="NOT found">
             </div>
           </div>
         </div>
@@ -282,11 +294,11 @@ include 'header.php';
               table += '</ul>';
               table += '</div>';
               table += '</h5>';
-              
+
               table += '<p class="card-text"><pre>' + value.msg + '</pre></p>';
               table += '<a href="' + value.attechment + '" class="card-text d-block mb-3" download>' + value.attechment + '</a>';
 
-              // table += '<a id="reply" class="btn btn-primary">Reply</a>';
+              table += '<a id="reply" data-toggle="modal" data-target="#exampleModal" class="btn btn-primary">Reply</a>';
               // table += '<a id="replyall" class="btn btn-primary ml-3">Reply All</a>';
               table += '</div>';
               table += '<div class="col-sm-6">';
@@ -301,22 +313,32 @@ include 'header.php';
             });
 
             $("#load-table").append(table);
+
+            $("#reply").on("click", function() {
+              $.ajax({
+                url: "dashboard.php",
+                type: "post",
+                data: {
+                  'sender': data[0]['sender_email'],
+                  'reciver': data[0]['reciver_email']
+                },
+                dataType: "JSON",
+                success: function(data) {
+                  console.log(data);
+
+                }
+              });
+
+            });
+
           }
         }
       });
 
     });
 
-//reply button 
 
-// $(document).on("click",function(e){
-// e.stopPropagation();
 
-// var all_details = $(this).val();
-
-// console.log(all_details);
-
-// });
 
 
     $(document).on("change", ".check", function(e) {
@@ -402,7 +424,7 @@ include 'header.php';
     });
 
 
-    $(document).on("cllick",".check",function(e) {
+    $(document).on("cllick", ".check", function(e) {
       e.preventDefault();
       var isChecked = $(this).is(':checked');
       var check_id = $(this).attr("data-id");
@@ -504,7 +526,7 @@ include 'header.php';
       form_data.append('ccemaile', ccemail);
       form_data.append('bccmaile', bccemail);
       form_data.append('subject', subject);
-      form_data.append('msg',  message);
+      form_data.append('msg', message);
 
 
       if (toemail == '') {
@@ -519,13 +541,13 @@ include 'header.php';
         alert("Subject is required");
         return false;
       }
-      if (msg == '' && msg== null) {
+      if (msg == '' && msg == null) {
         alert("msg is required");
         return false;
       }
 
-   
-        
+
+
 
       $.ajax({
         url: "inbox_mail_send.php",

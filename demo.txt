@@ -371,3 +371,62 @@ $output .='</div>';
 
 
 ?>
+
+...................... submit data form ............. loding button on .....................
+
+$.ajax({
+                url: "backend/edit_profile.php",
+                data: formData,
+                cache: false,
+                processData: false,
+                contentType: false,
+                dataType: 'JSON',
+                type: 'POST',
+                beforeSend: function() {
+                    var html = '<button class="btn btn-primary" type="button" disabled>' +
+                        '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Please Wait...' +
+                        '</button>';
+                    $('.updating_btn').html(html);
+                },
+                success: function(response) {
+                    // register successfully
+                    if (response.edit_profile == true) {
+                        $("#edit_success").removeClass('d-none');
+                        setTimeout(function() {
+                            location.reload();
+                        }, 2000);
+                    } else {
+                        if (response.fname.fname_error) {
+                            $('#fname_err').html(response.fname.fname_error)
+                        } else {
+                            $('#fname_err').html('')
+                        }
+                        // last name
+                        if (response.lname.lname_error) {
+                            $('#lname_err').html(response.lname.lname_error)
+                        } else {
+                            $('#lname_err').html('')
+                        }
+                        // recover email
+                        if (response.recoveryemail.recoveryemail_error) {
+                            $('#recovery_email_err').html(response.recoveryemail.recoveryemail_error)
+                        } else {
+                            $('#recovery_email_err').html('')
+                        }
+                        // profile pic
+                        if (response.profile_img.response) {
+                        } else {
+                            $('#profile_err').html(response.profile_img.message)
+                        }
+                    }
+                },
+                complete: function() {
+                    $('.updating_btn').html('<button class="btn btn-outline-dark edit_profile profile_shadow" id="edit_profile">Submit</button>')
+                }
+            })
+
+
+....................... End Loding button work...........................................
+
+
+
